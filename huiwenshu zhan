@@ -1,0 +1,28 @@
+int main()
+{
+	char a[100], s[100];
+	int i, next,mid, len,top;
+	top = 0;
+	gets(a);
+	len = strlen(a);
+	mid = len / 2 - 1;
+	for (i = 0; i <= mid; i++)
+	{
+		s[++top] = a[i];
+	}
+	if (len % 2 == 0)
+		next = mid + 1;
+	if (len % 2 != 0)
+		next = mid + 2;
+	for (i =next; i <= len - 1; i++)
+	{
+		if (a[i] != s[top])
+			break;
+		top--;
+	}
+	if (top == 0)
+		printf("yes");
+	else
+		printf("no");
+	return 0;
+}
