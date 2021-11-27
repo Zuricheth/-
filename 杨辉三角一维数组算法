@@ -1,0 +1,19 @@
+int main()
+{
+	int i, j, k, n, t, Buf[21] = { 0,1 };
+	printf("请输入杨辉三角的行数:>");
+	scanf("%d", &n);
+	for (i = 1; i <= n; i++)
+	{
+		t = 0;
+		for (j = 1; j <= i; j++)
+		{
+			k = Buf[j];
+			Buf[j] = k + t;
+			t = k;
+			printf("%6d", Buf[j]);
+		}
+		printf("\n");
+	}
+	return 0;
+}
