@@ -1,0 +1,86 @@
+void BubbleSort(int a[],int lenth)
+{
+	int i, j,t;
+	for (i = 0; i < lenth - 1; i++)
+	{
+		for (j = 0; j < lenth- i; j++)
+		{
+			if (a[j] > a[j+ 1])
+			{
+				t = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = t;
+			}
+		}
+	}
+	for (i = 0; i < lenth - 1; i++)
+		printf("%d ", a[i]);
+}
+int a[20] = {5,6,7,8,9,5,24,45,67,86,45,25,45,65,23,45,56,67,12,32 };
+void QuickSort( int left,int right)
+{
+	if (left > right)
+		return;
+	int i, j , temp,t;
+	i = left;
+	j = right;
+	temp = a[i];
+	while (i != j)
+	{
+		while (a[j] >= temp && i < j)
+		{
+			j--;
+		}
+		while (a[i] <= temp && i < j)
+		{
+			i++;
+		}
+		if (i < j)
+		{
+			t = a[i];
+			a[i] = a[j];
+			a[j] = t;
+		}
+	}
+	a[left] = a[i];
+	a[i] = temp;
+	QuickSort(left, i-1);
+	QuickSort(i + 1, right);
+	return;
+}
+int main()
+{ 
+	int left, right,mid,target;
+	int i;
+	target = 32;
+	int lenth = sizeof(a) / sizeof(a[0]);
+	QuickSort(0, lenth-1);
+	for ( i = 0; i < 20; i++)
+		printf("%d ", a[i]);
+	left = 0;
+	right = sizeof(a) / sizeof(a[0])-1;
+	mid = (left + right) / 2;
+	while(left<=right)
+	{
+		if (a[mid] > target)
+		{
+			right = mid - 1;
+			mid = (right + left) / 2;
+		}
+		if (a[mid] < target)
+		{
+			left = mid + 1;
+			mid = (right + left) / 2;
+		}
+		if (a[mid] == target)
+		{
+			printf("\n找到了，下标是:>");
+			printf("%d", mid); 
+			break;
+		}
+		if (left > right)
+			printf("找不到");
+	}
+
+	return 0;
+}
