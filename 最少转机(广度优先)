@@ -1,0 +1,53 @@
+int book[101], e[51][51],n, min = 9999999;
+struct note
+{
+	int x;
+	int s;
+};
+int main()
+{
+	struct note que[2501];
+	int i, j, n, m, startx, end,a,b,cur,flag=0;
+	int head, tail;
+	scanf("%d %d %d %d", &n, &m, &startx, &end);
+	for (i = 1; i <= n; i++)
+		for (j = 1; j <= n; j++)
+			if (i == j) e[i][j] = 0;
+			else e[i][j] = 9999999;
+	for (i = 1; i <= m; i++)
+	{
+		scanf("%d %d", &a, &b);
+		e[a][b] = 1;
+		e[b][a] = 1;
+	}
+	head = 1;
+	tail = 1;
+	que[tail].x = startx;
+	que[tail].s = 0;
+	tail++;
+	book[startx] = 1;
+	while (head < tail)
+	{
+		cur = que[head].x;
+		for (i = 1; i <= n; i++)
+		{
+			if (e[cur][i] != 9999999 && book[i] == 0)
+			{
+				book[i] = 1;
+				que[tail].x = i;
+				que[tail].s = que[head].s + 1;
+				tail++;
+			}
+			if (que[tail - 1].x == end)
+			{
+				flag = 1;
+				break;
+			}
+		}
+		if (flag == 1)
+			break;
+		head++;
+	}
+	printf("%d", que[tail - 1].s);
+	return 0;
+}
